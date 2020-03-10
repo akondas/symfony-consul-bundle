@@ -1,0 +1,30 @@
+services:
+  SensioLabs\Consul\ServiceFactory: ~
+
+  SensioLabs\Consul\Services\Agent:
+    factory: ['@SensioLabs\Consul\ServiceFactory', 'get']
+    arguments: ['SensioLabs\Consul\Services\AgentInterface']
+
+  Akondas\ConsulBundle\Service\ConsulAgent:
+    class: 'Akondas\ConsulBundle\Service\ConsulAgent\SensioLabsConsulAgent'
+    arguments:
+      - '@SensioLabs\Consul\Services\Agent'
+      - '@router.default'
+
+  Akondas\ConsulBundle\Command\RegisterServiceCommand:
+    arguments:
+      - '@Akondas\ConsulBundle\Service\ConsulAgent'
+    tags: ['console.command']
+
+  Akondas\ConsulBundle\Command\DeregisterServiceCommand:
+    arguments:
+      - '@Akondas\ConsulBundle\Service\ConsulAgent'
+    tags: ['console.command']
+
+  Akondas\ConsulBundle\Command\DebugCheckCommand:
+    arguments:
+      - '@Akondas\ConsulBundle\Service\ConsulAgent'
+    tags: ['console.command']
+
+  Akondas\ConsulBundle\Controller\HealthController:
+    tags: ['controller.service_arguments']

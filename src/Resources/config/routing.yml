@@ -1,0 +1,3 @@
+consul_health_check:
+  path: '/health'
+  controller: Akondas\ConsulBundle\Controller\HealthController::check

@@ -1,0 +1,53 @@
+{
+    "name": "akondas/symfony-consul-bundle",
+    "type": "library",
+    "description": "Auto register symfony app with Consul",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
+    "require": {
+        "sensiolabs/consul-php-sdk": "^3.1",
+        "symfony/framework-bundle": "^5.0",
+        "symfony/console": "^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.14",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan-phpunit": "^0.12.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Akondas\\ConsulBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Akondas\\ConsulBundle\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "check-cs": [
+            "php-cs-fixer fix --dry-run --diff"
+        ],
+        "fix-cs": [
+            "php-cs-fixer fix"
+        ],
+        "phpstan": [
+            "phpstan analyse src tests --level=max"
+        ],
+        "phpunit": [
+            "phpunit --colors=always"
+        ],
+        "tests": [
+            "@check-cs",
+            "@phpstan",
+            "@phpunit"
+        ]
+    }
+}
