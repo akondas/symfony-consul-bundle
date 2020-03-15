@@ -1,2 +1,28 @@
 includes:
-	- vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+parameters:
+    ignoreErrors:
+            -
+                    message: "#^Cannot cast array\\<string\\>\\|bool\\|string\\|null to string\\.$#"
+                    count: 1
+                    path: src/Command/DebugCheckCommand.php
+
+            -
+                    message: "#^Cannot cast array\\<string\\>\\|bool\\|string\\|null to string\\.$#"
+                    count: 2
+                    path: src/Command/DeregisterServiceCommand.php
+
+            -
+                    message: "#^Cannot cast array\\<string\\>\\|bool\\|string\\|null to string\\.$#"
+                    count: 3
+                    path: src/Command/RegisterServiceCommand.php
+
+            -
+                    message: "#^Cannot cast array\\<string\\>\\|bool\\|string\\|null to int\\.$#"
+                    count: 1
+                    path: src/Command/RegisterServiceCommand.php
+
+            -
+                    message: "#^Cannot call method scalarNode\\(\\) on Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\|null\\.$#"
+                    count: 1
+                    path: src/DependencyInjection/Configuration.php

@@ -1,5 +1,7 @@
 services:
-  SensioLabs\Consul\ServiceFactory: ~
+  SensioLabs\Consul\ServiceFactory:
+    arguments:
+      - {'base_uri': '%consul.agent.base_uri%'}
 
   SensioLabs\Consul\Services\Agent:
     factory: ['@SensioLabs\Consul\ServiceFactory', 'get']
@@ -14,16 +16,21 @@ services:
   Akondas\ConsulBundle\Command\RegisterServiceCommand:
     arguments:
       - '@Akondas\ConsulBundle\Service\ConsulAgent'
+      - '%consul.service.name%'
+      - '%consul.service.host%'
+      - '%consul.service.port%'
     tags: ['console.command']
 
   Akondas\ConsulBundle\Command\DeregisterServiceCommand:
     arguments:
       - '@Akondas\ConsulBundle\Service\ConsulAgent'
+      - '%consul.service.name%'
     tags: ['console.command']
 
   Akondas\ConsulBundle\Command\DebugCheckCommand:
     arguments:
       - '@Akondas\ConsulBundle\Service\ConsulAgent'
+      - '%consul.service.name%'
     tags: ['console.command']
 
   Akondas\ConsulBundle\Controller\HealthController:

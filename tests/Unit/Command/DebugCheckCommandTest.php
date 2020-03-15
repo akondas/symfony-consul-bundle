@@ -17,7 +17,7 @@ final class DebugCheckCommandTest extends TestCase
         $mock = $this->createMock(ConsulAgent::class);
         $mock->method('check')->willReturn(new Check('passing', 'HTTP GET /health 200 OK Output: {"status": "UP"}'));
 
-        $tester = new CommandTester(new DebugCheckCommand($mock));
+        $tester = new CommandTester(new DebugCheckCommand($mock, 'symfony-app'));
         $tester->execute([]);
 
         $lines = explode(PHP_EOL, $tester->getDisplay());
@@ -30,7 +30,7 @@ final class DebugCheckCommandTest extends TestCase
         $mock = $this->createMock(ConsulAgent::class);
         $mock->method('check')->willReturn(new Check('critical', 'HTTP GET /health connection refused'));
 
-        $tester = new CommandTester(new DebugCheckCommand($mock));
+        $tester = new CommandTester(new DebugCheckCommand($mock, 'symfony-app'));
         $tester->execute([]);
 
         $lines = explode(PHP_EOL, $tester->getDisplay());
