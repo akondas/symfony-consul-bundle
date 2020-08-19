@@ -42,5 +42,5 @@ consul:
 Available commands:
 
  - `bin/console consul:register` - register application in Consul
- - `bin/console consule:deregister` - deregister application from Consul
+ - `bin/console consul:deregister` - deregister application from Consul
  - `bin/console debug:consul-check` - debug Consul check 
