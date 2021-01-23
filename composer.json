@@ -2,6 +2,13 @@
     "name": "akondas/symfony-consul-bundle",
     "type": "symfony-bundle",
     "description": "Auto register symfony app with Consul",
+    "keywords": [
+        "php",
+        "symfony",
+        "symfony-bundle",
+        "consul",
+        "microservices"
+    ],
     "license": "MIT",
     "authors": [
         {
