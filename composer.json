@@ -53,7 +53,7 @@
             "phpunit --colors=always"
         ],
         "build": [
-            "composer audit",
+            "@composer audit",
             "@check-cs",
             "@phpstan",
             "@phpunit"
