@@ -33,9 +33,13 @@ final class DeregisterServiceCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->agent->deregisterService((string) $input->getOption('name'));
+        $name = $input->getOption('name');
+        if (!is_string($name)) {
+            throw new \InvalidArgumentException('Option \'name\' must be a string.');
+        }
+        $this->agent->deregisterService($name);
 
-        $output->writeln(sprintf('Service %s deregistered from Consul', (string) $input->getOption('name')));
+        $output->writeln(sprintf('Service %s deregistered from Consul', $name));
 
         return 0;
     }

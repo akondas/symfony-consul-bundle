@@ -33,7 +33,11 @@ final class DebugCheckCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $check = $this->agent->check((string) $input->getOption('name'));
+        $name = $input->getOption('name');
+        if (!is_string($name)) {
+            throw new \InvalidArgumentException('Option \'name\' must be a string.');
+        }
+        $check = $this->agent->check($name);
 
         if ($check->status() === 'passing') {
             $output->writeln(sprintf('<fg=green>Status: %s<fg=default>', $check->status()));
