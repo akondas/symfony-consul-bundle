@@ -39,13 +39,22 @@ final class RegisterServiceCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->agent->registerService(
-            (string) $input->getOption('name'),
-            (string) $input->getOption('host'),
-            (int) $input->getOption('port')
-        );
+        $name = $input->getOption('name');
+        $host = $input->getOption('host');
+        $port = $input->getOption('port');
+        if (!is_string($name)) {
+            throw new \InvalidArgumentException('Option \'name\' must be a string.');
+        }
+        if (!is_string($host)) {
+            throw new \InvalidArgumentException('Option \'host\' must be a string.');
+        }
+        if (!is_numeric($port)) {
+            throw new \InvalidArgumentException('Option \'port\' must be numeric.');
+        }
 
-        $output->writeln(sprintf('Service %s registered in Consul', (string) $input->getOption('name')));
+        $this->agent->registerService($name, $host, (int) $port);
+
+        $output->writeln(sprintf('Service %s registered in Consul', $name));
 
         return 0;
     }
