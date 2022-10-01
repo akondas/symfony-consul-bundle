@@ -29,5 +29,5 @@ jobs:
         with:
           dependency-versions: "locked"
 
-      - name: "Run composer tests"
-        run: "composer tests"
+      - name: "Run composer build"
+        run: "composer build"
