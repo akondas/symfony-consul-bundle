@@ -21,20 +21,13 @@ jobs:
           php-version: "8.0"
           ini-values: memory_limit=-1
 
-      - name: "Cache Composer dependencies"
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.composer/cache
-            vendor
-          key: "php-8.0"
-          restore-keys: "php-8.0"
-
       - name: "Validate composer"
         run: "composer validate"
 
       - name: "Install dependencies"
-        run: "composer install"
+        uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: "locked"
 
       - name: "Run composer tests"
         run: "composer tests"
